@@ -10,14 +10,37 @@
         function getComputerChoice() {
             const randomNum = Math.floor(Math.random()*3)
 
-            if (randomNum == 0) {
-                return "rock"
-            } else if (randomNum == 1) {
-                return "paper"
-            } else {
-                return "scissors"
+            if (randomNum === 0) {
+                return "Rock"
+            } else if (randomNum === 1) {
+                return "Paper"
+            } else if (randomNum === 2) {
+                return "Scissors"
             }
         }
+
+        function playRound(playerSelection, computerSelection) {
+            let player = playerSelection.toUpperCase()
+            let computer = computerSelection.toUpperCase()
+
+            if(player === computer) {
+                return `${player} and ${computer}, It's a Tie`
+            } else if (player === "ROCK" && computer === "PAPER") {
+                return "PAPER beats ROCK, you Lost!"
+            } else if (player === "ROCK" && computer === "SCISSORS") {
+                return "ROCK beats SCISSORS, you Won!"
+            } else if (player === "PAPER" && computer === "ROCK") {
+                return "PAPER beats ROCK, you Won!"
+            } else if (player === "PAPER" && computer === "SCISSORS") {
+                return "SCISSORS beat PAPER, you Lost!"
+            } else if (player === "SCISSORS" && computer === "PAPER") {
+                return "SCISSORS beat PAPER, you Won!"
+            } else if (player === "SCISSORS" && computer === "ROCK") {
+                return "ROCK beats SCISSORS, you Lost!"
+            }
+        }
+
+        
     </script>
 </body>
 </html>
