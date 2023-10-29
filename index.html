@@ -19,28 +19,63 @@
             }
         }
 
-        function playRound(playerSelection, computerSelection) {
-            let player = playerSelection.toUpperCase()
-            let computer = computerSelection.toUpperCase()
 
+
+        function playRound(player, computer) {
+            
             if(player === computer) {
-                return `${player} and ${computer}, It's a Tie`
+                console.log(`${player} and ${computer}, It's a Tie`)
+                return [1,1]
             } else if (player === "ROCK" && computer === "PAPER") {
-                return "PAPER beats ROCK, you Lost!"
+                console.log("PAPER beats ROCK, you Lost!")
+                return [0,1]
             } else if (player === "ROCK" && computer === "SCISSORS") {
-                return "ROCK beats SCISSORS, you Won!"
+                console.log("ROCK beats SCISSORS, you Won!")
+                return [1,0]
             } else if (player === "PAPER" && computer === "ROCK") {
-                return "PAPER beats ROCK, you Won!"
+                console.log("PAPER beats ROCK, you Won!")
+                return [1,0]
             } else if (player === "PAPER" && computer === "SCISSORS") {
-                return "SCISSORS beat PAPER, you Lost!"
+                console.log("SCISSORS beat PAPER, you Lost!")
+                return [0,1]
             } else if (player === "SCISSORS" && computer === "PAPER") {
-                return "SCISSORS beat PAPER, you Won!"
+                console.log("SCISSORS beat PAPER, you Won!")
+                return [1,0]
             } else if (player === "SCISSORS" && computer === "ROCK") {
-                return "ROCK beats SCISSORS, you Lost!"
+                console.log("ROCK beats SCISSORS, you Lost!")
+                return [0,1]
             }
         }
 
+
+
+        function game() {
+            let playerScore = 0
+            let computerScore = 0
+
+            for(let i = 0; i < 5; i++) {
+                do {
+                    var playerChoice = prompt("\nYour move : ").toUpperCase()
+                } while (!["ROCK", "PAPER", "SCISSORS"].includes(playerChoice))
+                let computerChoice = getComputerChoice().toUpperCase()
+
+                let roundScores = playRound(playerChoice, computerChoice)
+                playerScore += roundScores[0]
+                computerScore += roundScores[1]
+
+                console.log(`Your Score : ${playerScore}\nComputer Score : ${computerScore}`)
+            }
+
+            if (playerScore === computerScore) {
+                console.log("Game Tied!")
+            } else if (playerScore > computerScore) {
+                console.log("You Won the Game!")
+            } else {
+                console.log("You Lost the Game!")
+            }
+        }
         
+        game()
     </script>
 </body>
 </html>
