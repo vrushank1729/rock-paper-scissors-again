@@ -14,33 +14,79 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     function playRound(player, computer) {
+        var p = document.createElement('p')
+        const results = document.querySelector('.results')
         
         if(player === computer) {
-            console.log(`${player} and ${computer}, It's a Tie`)
+            p.textContent = `${player} and ${computer}, It's a Tie`
+            results.appendChild(p)
+            return [0,0]
         } else if (player === "ROCK" && computer === "PAPER") {
-            console.log("PAPER beats ROCK, you Lost!")
+            p.textContent = "PAPER beats ROCK, you Lost!"
+            results.appendChild(p)
+            return [0,1]
         } else if (player === "ROCK" && computer === "SCISSORS") {
-            console.log("ROCK beats SCISSORS, you Won!")
+            p.textContent = "ROCK beats SCISSORS, you Won!"
+            results.appendChild(p)
+            return [1,0]
         } else if (player === "PAPER" && computer === "ROCK") {
-            console.log("PAPER beats ROCK, you Won!")
+            p.textContent = "PAPER beats ROCK, you Won!"
+            results.appendChild(p)
+            return [1,0]
         } else if (player === "PAPER" && computer === "SCISSORS") {
-            console.log("SCISSORS beat PAPER, you Lost!")
+            p.textContent = "SCISSORS beat PAPER, you Lost!"
+            results.appendChild(p)
+            return [0,1]
         } else if (player === "SCISSORS" && computer === "PAPER") {
-            console.log("SCISSORS beat PAPER, you Won!")
+            p.textContent = "SCISSORS beat PAPER, you Won!"
+            results.appendChild(p)
+            return [1,0]
+            console.log("PAPER beats ROCK, you Lost!")
         } else if (player === "SCISSORS" && computer === "ROCK") {
-            console.log("ROCK beats SCISSORS, you Lost!")
+            p.textContent = "ROCK beats SCISSORS, you Lost!"
+            results.appendChild(p)
+            return [0,1]
         }
     }
-    
-    
-    
+
+
+
+
     function game() {
         const buttons = document.querySelectorAll('button')
-    
+        console.log("SCISSORS beat PAPER, you Lost!")
+        var scores
+        var playerScore = 0
+        var computerScore = 0
+        const results = document.querySelector('.results')
+
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
+                if(playerScore === 5 || computerScore === 5) {
+                    return 0
+                }
                 let computerChoice = getComputerChoice()
-                playRound(button.id, computerChoice)
+                scores = playRound(button.id, computerChoice)
+                playerScore += scores[0]
+                computerScore += scores[1]
+
+                const p1 = document.createElement('p')
+                const p2 = document.createElement('p')
+                const h1 = document.createElement('h1')
+                p1.textContent = `Player : ${playerScore}`
+                results.appendChild(p1)
+                p2.textContent = `Computer : ${computerScore}`
+                results.appendChild(p2)
+
+                if(playerScore === 5) {
+                    h1.textContent = 'You Won the game!'
+                    results.appendChild(h1)
+                }
+                if(computerScore === 5) {
+                    h1.textContent = 'Computer Won the game!'
+                    results.appendChild(h1)
+                }
+                
             })
         })
     }
